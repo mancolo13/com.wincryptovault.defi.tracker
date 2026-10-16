@@ -32,27 +32,26 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: AppTheme.surfaceColor,
         indicatorColor: AppTheme.primaryColor.withValues(alpha: 0.2),
         destinations: [
-        NavigationDestination(
-          icon: const Icon(Icons.account_balance_wallet_outlined),
-          selectedIcon: const Icon(Icons.account_balance_wallet, color: AppTheme.primaryColor),
-          label: 'Assets',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.currency_exchange_outlined),
-          selectedIcon: const Icon(Icons.currency_exchange, color: AppTheme.primaryColor),
-          label: 'Yields',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.local_gas_station_outlined),
-          selectedIcon: const Icon(Icons.local_gas_station, color: AppTheme.primaryColor),
-          label: 'Gas',
-        ),
-        NavigationDestination(
-          icon: const Icon(Icons.hub_outlined),
-          selectedIcon: const Icon(Icons.hub, color: AppTheme.primaryColor),
-          label: 'Chains',
-        ),
-
+          NavigationDestination(
+            icon: const Icon(Icons.account_balance_wallet_outlined),
+            selectedIcon: const Icon(Icons.account_balance_wallet, color: AppTheme.primaryColor),
+            label: 'Vault',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.donut_large_outlined),
+            selectedIcon: const Icon(Icons.donut_large, color: AppTheme.primaryColor),
+            label: 'Assets',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.water_damage_outlined),
+            selectedIcon: const Icon(Icons.water_damage, color: AppTheme.primaryColor),
+            label: 'Yields',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.local_gas_station_outlined),
+            selectedIcon: const Icon(Icons.local_gas_station, color: AppTheme.primaryColor),
+            label: 'Network',
+          ),
         ],
       ),
     );

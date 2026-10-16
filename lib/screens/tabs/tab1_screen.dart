@@ -2,25 +2,18 @@ import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 import '../../services/routing_service.dart';
 
-class Tab1Screen extends StatefulWidget {
+
+class Tab1Screen extends StatelessWidget {
   const Tab1Screen({super.key});
-
-  @override
-  State<Tab1Screen> createState() => _Tab1ScreenState();
-}
-
-class _Tab1ScreenState extends State<Tab1Screen> {
-  int _score = 92;
-  bool _active = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Win • Assets'),
+        title: const Text('Win • DeFiVault'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.stars_rounded, color: AppTheme.primaryColor),
+            icon: const Icon(Icons.qr_code_scanner, color: AppTheme.primaryColor),
             onPressed: () => RoutingService.openRegistrationUrl(),
           ),
         ],
@@ -29,83 +22,69 @@ class _Tab1ScreenState extends State<Tab1Screen> {
         padding: const EdgeInsets.all(16),
         children: [
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [AppTheme.primaryColor.withValues(alpha: 0.3), AppTheme.surfaceColor],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppTheme.primaryColor.withValues(alpha: 0.4)),
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: AppTheme.primaryColor.withValues(alpha: 0.35)),
             ),
-            child: Column(
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Assets Health', style: const TextStyle(fontSize: 16, color: Colors.white70)),
-                    Switch(
-                      value: _active,
-                      activeThumbColor: AppTheme.primaryColor,
-                      onChanged: (v) => setState(() => _active = v),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Text('$_score%', style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                LinearProgressIndicator(
-                  value: 0.92,
-                  backgroundColor: Colors.white12,
-                  color: AppTheme.primaryColor,
-                  minHeight: 8,
-                  borderRadius: BorderRadius.circular(4),
-                ),
+                Text('TOTAL DEFI ASSETS VALUE', style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+                SizedBox(height: 6),
+                Text('\$34,840.20', style: TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: Colors.white)),
+                SizedBox(height: 4),
+                Text('≈ 13.12 ETH • Staking Yield: +\$18.40/day', style: TextStyle(color: AppTheme.secondaryColor, fontSize: 13, fontWeight: FontWeight.bold)),
               ],
             ),
           ),
           const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(child: _buildMetric('Total', '1,840', Icons.analytics)),
-              const SizedBox(width: 12),
-              Expanded(child: _buildMetric('Active', '99.2%', Icons.speed)),
-            ],
-          ),
-          const SizedBox(height: 16),
-          ...List.generate(3, (i) => Card(
-            color: AppTheme.surfaceColor,
-            margin: const EdgeInsets.only(bottom: 10),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: AppTheme.primaryColor.withValues(alpha: 0.2),
-                child: Icon(Icons.check, color: AppTheme.primaryColor),
-              ),
-              title: Text('Assets Priority ${i + 1}'),
-              subtitle: Text('Progress: Normal • Level ${i + 1}'),
-              trailing: const Icon(Icons.chevron_right, color: Colors.white38),
-              onTap: () => setState(() => _score = (_score + 1) % 100),
-            ),
-          )),
+          const Text('Connected Wallet Tokens', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 10),
+          _tokenTile('Ethereum', 'ETH', '8.45 ETH', '\$22,480', Icons.currency_bitcoin),
+          _tokenTile('Solana', 'SOL', '64.2 SOL', '\$9,630', Icons.blur_on),
+          _tokenTile('USD Coin', 'USDC', '2,730 USDC', '\$2,730', Icons.attach_money),
         ],
       ),
     );
   }
 
-  Widget _buildMetric(String t, String v, IconData ic) {
+  Widget _tokenTile(String name, String symbol, String amount, String usd, IconData ic) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(color: AppTheme.surfaceColor, borderRadius: BorderRadius.circular(16)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Icon(ic, color: AppTheme.secondaryColor, size: 28),
-          const SizedBox(height: 8),
-          Text(t, style: const TextStyle(color: Colors.white60, fontSize: 13)),
-          Text(v, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          CircleAvatar(
+            backgroundColor: AppTheme.primaryColor.withValues(alpha: 0.2),
+            child: Icon(ic, color: AppTheme.primaryColor),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                Text(symbol, style: const TextStyle(color: Colors.white60, fontSize: 12)),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(usd, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              Text(amount, style: const TextStyle(color: AppTheme.secondaryColor, fontSize: 12)),
+            ],
+          ),
         ],
       ),
     );
   }
 }
+
